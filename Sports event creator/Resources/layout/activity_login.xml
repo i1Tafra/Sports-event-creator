@@ -17,6 +17,7 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:background="@drawable/back"
             android:id="@+id/button_signin"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="137dp"
@@ -27,27 +28,29 @@
             android:text="@string/action_sign_in_short"
             app:layout_constraintEnd_toStartOf="@+id/button_delete_credentials"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/password"
-            app:layout_constraintTop_toBottomOf="@+id/password" />
+            app:layout_constraintStart_toStartOf="@+id/enter_password"
+            app:layout_constraintTop_toBottomOf="@+id/enter_password" />
 
         <Button
+            android:background="@drawable/back"
             android:id="@+id/button_delete_credentials"
             android:layout_width="137dp"
             android:layout_height="47dp"
             android:layout_marginTop="16dp"
             android:text="@string/action_delete_credentials"
-            app:layout_constraintEnd_toEndOf="@+id/password"
+            app:layout_constraintEnd_toEndOf="@+id/enter_password"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button_signin"
-            app:layout_constraintTop_toBottomOf="@+id/password" />
+            app:layout_constraintTop_toBottomOf="@+id/enter_password" />
 
         <EditText
             android:id="@+id/username"
             android:layout_width="304dp"
             android:layout_height="47dp"
             android:layout_marginTop="164dp"
+            android:background="@drawable/rounded_corner"
             android:ems="10"
-            android:hint="@string/enter_email"
+            android:hint="@string/enter_email_or_username"
             android:importantForAutofill="no"
             android:inputType="textEmailAddress"
             android:textAllCaps="false"
@@ -57,7 +60,8 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/password"
+            android:background="@drawable/rounded_corner"
+            android:id="@+id/enter_password"
             android:layout_width="304dp"
             android:layout_height="47dp"
             android:layout_marginTop="16dp"
@@ -72,25 +76,26 @@
             android:importantForAutofill="no" />
 
         <Button
+            android:background="@drawable/back"
             android:id="@+id/button_forgot_password"
             android:layout_width="304dp"
             android:layout_height="47dp"
             android:layout_marginTop="16dp"
             android:text="@string/forgot_password"
-            app:layout_constraintEnd_toEndOf="@+id/password"
-            app:layout_constraintStart_toStartOf="@+id/password"
+            app:layout_constraintEnd_toEndOf="@+id/enter_password"
+            app:layout_constraintStart_toStartOf="@+id/enter_password"
             app:layout_constraintTop_toBottomOf="@+id/button_signin" />
 
         <Button
+            android:background="@drawable/back"
             android:id="@+id/button_register"
             android:layout_width="304dp"
             android:layout_height="47dp"
             android:layout_marginTop="16dp"
             android:text="@string/action_register"
-
+            
             app:layout_constraintEnd_toEndOf="@+id/button_forgot_password"
             app:layout_constraintStart_toStartOf="@+id/button_forgot_password"
             app:layout_constraintTop_toBottomOf="@+id/button_forgot_password" />
-
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

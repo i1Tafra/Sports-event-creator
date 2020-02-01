@@ -7,6 +7,7 @@ using Android.Widget;
 namespace Sports_event_creator
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme", MainLauncher = true)]
+   // [Android.Runtime.Register("android/content/Intent", ApiSince = 1, DoNotGenerateAcw = true)]
     public class MainActivity : AppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -15,6 +16,10 @@ namespace Sports_event_creator
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_login);
+
+          //  var registerButton = FindViewById<EditText>(Resource.Id.button_register);
+
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

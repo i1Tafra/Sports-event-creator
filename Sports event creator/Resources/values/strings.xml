@@ -11,8 +11,19 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="enter_email_or_username">Enter your e-mail or username</string>
     <string name="enter_email">Enter your e-mail</string>
     <string name="enter_password">Enter your password</string>
     <string name="forgot_password">Forgot password?</string>
     <string name="action_register">Register</string>
+    <!-- Strings related to registration -->
+    <string name="username_text">Choose your username</string>
+    <string name="enter_email_register">Enter your e-mail</string>
+    <string name="repeat_email_register">Repeat your e-mail</string>
+    <string name="repeat_password_register">Repeat your password</string>
+    <string name="registration_text">Registration</string>
+    <string name="action_submit">SUBMIT</string>
+
+
+ 
 </resources>

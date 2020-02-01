@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/text_box_repeat_email"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+
+            android:id="@+id/enter_email"
+            android:layout_width="297dp"
+            android:layout_height="37dp"
+
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/enter_email"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="@+id/repeat_email"
+            app:layout_constraintStart_toStartOf="@+id/repeat_email"
+            app:layout_constraintTop_toBottomOf="@+id/text_box_enter_email" />
+
+        <TextView
+            android:id="@+id/text_box_registration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:text="@string/registration_text"
+            android:textStyle="bold"
+            android:textSize="26dp"
+            app:layout_constraintStart_toStartOf="@+id/text_box_enter_email"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_box_enter_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/enter_email"
+            app:layout_constraintStart_toStartOf="@+id/enter_email"
+            app:layout_constraintTop_toBottomOf="@+id/enter_username" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/repeat_email_register"
+            app:layout_constraintEnd_toEndOf="@+id/enter_email"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/enter_email"
+            app:layout_constraintTop_toBottomOf="@+id/enter_email" />
+
+        <EditText
+
+            android:id="@+id/repeat_email"
+            android:layout_width="297dp"
+            android:layout_height="37dp"
+
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/repeat_email_register"
+            android:importantForAutofill="no"
+            android:inputType="textEmailAddress"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="@+id/enter_password"
+            app:layout_constraintStart_toStartOf="@+id/enter_password"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/text_box_enter_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/enter_password"
+            app:layout_constraintEnd_toEndOf="@+id/repeat_email"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/repeat_email"
+            app:layout_constraintTop_toBottomOf="@+id/repeat_email" />
+
+        <EditText
+            android:id="@+id/enter_password"
+            android:layout_width="297dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner"
+            android:ems="10"
+            android:hint="@string/enter_password"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@+id/repeat_password"
+            app:layout_constraintStart_toStartOf="@+id/repeat_password"
+            app:layout_constraintTop_toBottomOf="@+id/text_box_enter_password" />
+
+        <TextView
+            android:id="@+id/text_box_repeat_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/repeat_password_register"
+            app:layout_constraintEnd_toEndOf="@+id/enter_password"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/enter_password"
+            app:layout_constraintTop_toBottomOf="@+id/enter_password" />
+
+        <EditText
+            android:id="@+id/repeat_password"
+            android:layout_width="297dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner"
+            android:ems="10"
+            android:hint="@string/repeat_password_register"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_box_repeat_password" />
+
+        <Button
+            android:id="@+id/button_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/back"
+            android:text="@string/action_submit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/repeat_password" />
+
+        <TextView
+            android:id="@+id/text_box_choose_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/username_text"
+            app:layout_constraintStart_toStartOf="@+id/text_box_registration"
+            app:layout_constraintTop_toBottomOf="@+id/text_box_registration" />
+
+        <EditText
+
+            android:id="@+id/enter_username"
+            android:layout_width="297dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_corner"
+            android:hint="@string/username_text"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="@+id/enter_email"
+            app:layout_constraintStart_toStartOf="@+id/enter_email"
+            app:layout_constraintTop_toBottomOf="@+id/text_box_choose_username" />
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
