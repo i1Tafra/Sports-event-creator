@@ -5344,94 +5344,97 @@ namespace SportsEventCreator
 			public const int err_not_match = 2131558475;
 			
 			// aapt resource value: 0x7F0D004C
-			public const int fab_transformation_scrim_behavior = 2131558476;
+			public const int err_weak_pass = 2131558476;
 			
 			// aapt resource value: 0x7F0D004D
-			public const int fab_transformation_sheet_behavior = 2131558477;
+			public const int fab_transformation_scrim_behavior = 2131558477;
 			
 			// aapt resource value: 0x7F0D004E
-			public const int firebase_database_url = 2131558478;
+			public const int fab_transformation_sheet_behavior = 2131558478;
 			
 			// aapt resource value: 0x7F0D004F
-			public const int forgot_password = 2131558479;
+			public const int firebase_database_url = 2131558479;
 			
 			// aapt resource value: 0x7F0D0050
-			public const int gcm_defaultSenderId = 2131558480;
+			public const int forgot_password = 2131558480;
 			
 			// aapt resource value: 0x7F0D0051
-			public const int google_api_key = 2131558481;
+			public const int gcm_defaultSenderId = 2131558481;
 			
 			// aapt resource value: 0x7F0D0052
-			public const int google_app_id = 2131558482;
+			public const int google_api_key = 2131558482;
 			
 			// aapt resource value: 0x7F0D0053
-			public const int google_crash_reporting_api_key = 2131558483;
+			public const int google_app_id = 2131558483;
 			
 			// aapt resource value: 0x7F0D0054
-			public const int google_storage_bucket = 2131558484;
+			public const int google_crash_reporting_api_key = 2131558484;
 			
 			// aapt resource value: 0x7F0D0055
-			public const int hide_bottom_view_on_scroll_behavior = 2131558485;
+			public const int google_storage_bucket = 2131558485;
 			
 			// aapt resource value: 0x7F0D0056
-			public const int invalid_password = 2131558486;
+			public const int hide_bottom_view_on_scroll_behavior = 2131558486;
 			
 			// aapt resource value: 0x7F0D0057
-			public const int invalid_username = 2131558487;
+			public const int invalid_password = 2131558487;
 			
 			// aapt resource value: 0x7F0D0058
-			public const int login_failed = 2131558488;
+			public const int invalid_username = 2131558488;
 			
 			// aapt resource value: 0x7F0D0059
-			public const int mtrl_chip_close_icon_content_description = 2131558489;
+			public const int login_failed = 2131558489;
 			
 			// aapt resource value: 0x7F0D005A
-			public const int password_toggle_content_description = 2131558490;
+			public const int mtrl_chip_close_icon_content_description = 2131558490;
 			
 			// aapt resource value: 0x7F0D005B
-			public const int path_password_eye = 2131558491;
+			public const int password_toggle_content_description = 2131558491;
 			
 			// aapt resource value: 0x7F0D005C
-			public const int path_password_eye_mask_strike_through = 2131558492;
+			public const int path_password_eye = 2131558492;
 			
 			// aapt resource value: 0x7F0D005D
-			public const int path_password_eye_mask_visible = 2131558493;
+			public const int path_password_eye_mask_strike_through = 2131558493;
 			
 			// aapt resource value: 0x7F0D005E
-			public const int path_password_strike_through = 2131558494;
+			public const int path_password_eye_mask_visible = 2131558494;
 			
 			// aapt resource value: 0x7F0D005F
-			public const int project_id = 2131558495;
+			public const int path_password_strike_through = 2131558495;
 			
 			// aapt resource value: 0x7F0D0060
-			public const int prompt_email = 2131558496;
+			public const int project_id = 2131558496;
 			
 			// aapt resource value: 0x7F0D0061
-			public const int prompt_password = 2131558497;
+			public const int prompt_email = 2131558497;
 			
 			// aapt resource value: 0x7F0D0062
-			public const int registration_text = 2131558498;
+			public const int prompt_password = 2131558498;
 			
 			// aapt resource value: 0x7F0D0063
-			public const int repeat_email_register = 2131558499;
+			public const int registration_text = 2131558499;
 			
 			// aapt resource value: 0x7F0D0064
-			public const int repeat_password_register = 2131558500;
+			public const int repeat_email_register = 2131558500;
 			
 			// aapt resource value: 0x7F0D0065
-			public const int search_menu_title = 2131558501;
+			public const int repeat_password_register = 2131558501;
 			
 			// aapt resource value: 0x7F0D0066
-			public const int status_bar_notification_info_overflow = 2131558502;
+			public const int search_menu_title = 2131558502;
 			
 			// aapt resource value: 0x7F0D0067
-			public const int username_text = 2131558503;
+			public const int status_bar_notification_info_overflow = 2131558503;
 			
 			// aapt resource value: 0x7F0D0068
-			public const int warn_implementation_need = 2131558504;
+			public const int username_text = 2131558504;
 			
 			// aapt resource value: 0x7F0D0069
-			public const int welcome = 2131558505;
+			public const int warn_implementation_need = 2131558505;
+			
+			// aapt resource value: 0x7F0D006A
+			public const int welcome = 2131558506;
 			
 			static String()
 			{

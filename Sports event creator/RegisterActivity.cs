@@ -10,12 +10,15 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Firebase;
+using Firebase.Auth;
 using SportsEventCreator.Firebase;
+using Xamarin.Essentials;
 
 namespace SportsEventCreator
 {
     [Activity(Label = "RegisterActivity")]
-    public class RegisterActivity : Activity, IOnCompleteListener
+    public class RegisterActivity : Activity
     {
         #region Properties and variables
         private EditText editUsername;
@@ -26,9 +29,7 @@ namespace SportsEventCreator
 
         private Button btnSumbit;
 
-
-        //private static FirebaseApp app;
-        //private FirebaseAuth auth;
+        private static uint MIN_PASSWORD_LENGTH = 8;
         #endregion
 
         private void InitGUIElements()
@@ -53,19 +54,71 @@ namespace SportsEventCreator
 
         private void InitBtnClickListeners()
         {
-            btnSumbit.Click += (sender, e) => {
-                if (ValidateInput())
+            btnSumbit.Click += (sender, e) =>
+            {
+                if (ValidateInput() && ValidatePasswordComplexity())
                 {
-                    var task = FirebaseHandler.Instance.Auth
-                    .CreateUserWithEmailAndPassword(editMail.Text, editPassword.Text)
-                    .AddOnCompleteListener(this);
+                    RegisterUser();
+
+                    ///TODO: Research how to implement email verification
+                    /*using var user = authResult.User;
+                    using var actionCode = ActionCodeSettings.NewBuilder()
+                    .SetAndroidPackageName(PackageName, true, "0")
+                    .SetUrl("https://sport-event-creator.firebaseapp.com/__/auth/action")
+                    .Build();
+                    await user.SendEmailVerificationAsync(actionCode).ConfigureAwait(true);*/
                 }
             };
         }
 
+        private async void RegisterUser()
+        {
+            try
+            {
+                using var authResult = await FirebaseHandler.Instance.Auth
+                .CreateUserWithEmailAndPasswordAsync(editMail.Text, editPassword.Text)
+                .ConfigureAwait(false);
+
+                using var profile = new UserProfileChangeRequest.Builder()
+               .SetDisplayName(editUsername.Text)
+               .Build();
+
+                await authResult.User
+                .UpdateProfileAsync(profile)
+                .ConfigureAwait(false);
+
+                StartActivity(typeof(MainActivity));
+                Finish();
+            }
+            catch (FirebaseException excepion)
+            {
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    Toast.MakeText(ApplicationContext, excepion.Message, ToastLength.Short)
+                  .Show();
+                });
+            }
+        }
+
+        private bool ValidatePasswordComplexity()
+        {
+            var pass = editPassword.Text;
+
+            var result = (pass.Any(char.IsUpper) &&
+                pass.Any(char.IsLower) &&
+                pass.Any(char.IsDigit) &&
+                pass.Length >= MIN_PASSWORD_LENGTH);
+
+            if (!result)
+                Toast.MakeText(ApplicationContext, Resource.String.err_weak_pass, ToastLength.Short)
+                .Show();
+
+            return result;
+        }
+
         private bool ValidateInput()
         {
-            if(String.IsNullOrEmpty(editUsername.Text) ||
+            if (String.IsNullOrEmpty(editUsername.Text) ||
                 String.IsNullOrEmpty(editPassword.Text) ||
                 String.IsNullOrEmpty(editMail.Text))
             {
@@ -74,27 +127,14 @@ namespace SportsEventCreator
                 return false;
             }
 
-            if(!editPassword.Text.Equals(editPasswordRepeat.Text) ||
-              !editMail.Text.Equals(editMailRepeat.Text))
+            if (!editPassword.Text.Equals(editPasswordRepeat.Text, StringComparison.Ordinal) ||
+              !editMail.Text.Equals(editMailRepeat.Text, StringComparison.Ordinal))
             {
                 Toast.MakeText(ApplicationContext, Resource.String.err_not_match, ToastLength.Short)
                 .Show();
                 return false;
             }
             return true;
-        }
-
-        public void OnComplete(Android.Gms.Tasks.Task task)
-        {
-            if (task == null)
-                throw new ArgumentNullException(nameof(task));
-
-            if (!task.IsSuccessful)
-                Toast.MakeText(ApplicationContext, Resource.String.err_login_fail, ToastLength.Short)
-                    .Show();
-            else
-                Toast.MakeText(ApplicationContext, Resource.String.warn_implementation_need, ToastLength.Short)
-                    .Show();
         }
     }
 }
