@@ -13,12 +13,13 @@
     tools:context=".ui.login.LoginActivity">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
             android:background="@drawable/back"
-            android:id="@+id/button_signin"
+            android:id="@+id/btn_sign_in"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="137dp"
             android:layout_height="47dp"
@@ -26,25 +27,25 @@
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:text="@string/action_sign_in_short"
-            app:layout_constraintEnd_toStartOf="@+id/button_delete_credentials"
+            app:layout_constraintEnd_toStartOf="@+id/btn_delete"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="@+id/enter_password"
-            app:layout_constraintTop_toBottomOf="@+id/enter_password" />
+            app:layout_constraintStart_toStartOf="@+id/edit_password"
+            app:layout_constraintTop_toBottomOf="@+id/edit_password" />
 
         <Button
             android:background="@drawable/back"
-            android:id="@+id/button_delete_credentials"
+            android:id="@+id/btn_delete"
             android:layout_width="137dp"
             android:layout_height="47dp"
             android:layout_marginTop="16dp"
             android:text="@string/action_delete_credentials"
-            app:layout_constraintEnd_toEndOf="@+id/enter_password"
+            app:layout_constraintEnd_toEndOf="@+id/edit_password"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button_signin"
-            app:layout_constraintTop_toBottomOf="@+id/enter_password" />
+            app:layout_constraintStart_toEndOf="@+id/btn_sign_in"
+            app:layout_constraintTop_toBottomOf="@+id/edit_password" />
 
         <EditText
-            android:id="@+id/username"
+            android:id="@+id/edit_username"
             android:layout_width="304dp"
             android:layout_height="47dp"
             android:layout_marginTop="164dp"
@@ -61,41 +62,41 @@
 
         <EditText
             android:background="@drawable/rounded_corner"
-            android:id="@+id/enter_password"
+            android:id="@+id/edit_password"
             android:layout_width="304dp"
             android:layout_height="47dp"
             android:layout_marginTop="16dp"
             android:ems="10"
             android:hint="@string/enter_password"
             android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="@+id/username"
+            app:layout_constraintEnd_toEndOf="@+id/edit_username"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/username"
+            app:layout_constraintStart_toStartOf="@+id/edit_username"
 
-            app:layout_constraintTop_toBottomOf="@+id/username"
+            app:layout_constraintTop_toBottomOf="@+id/edit_username"
             android:importantForAutofill="no" />
 
         <Button
             android:background="@drawable/back"
-            android:id="@+id/button_forgot_password"
+            android:id="@+id/btn_password_forgot"
             android:layout_width="304dp"
             android:layout_height="47dp"
             android:layout_marginTop="16dp"
             android:text="@string/forgot_password"
-            app:layout_constraintEnd_toEndOf="@+id/enter_password"
-            app:layout_constraintStart_toStartOf="@+id/enter_password"
-            app:layout_constraintTop_toBottomOf="@+id/button_signin" />
+            app:layout_constraintEnd_toEndOf="@+id/edit_password"
+            app:layout_constraintStart_toStartOf="@+id/edit_password"
+            app:layout_constraintTop_toBottomOf="@+id/btn_sign_in" />
 
         <Button
             android:background="@drawable/back"
-            android:id="@+id/button_register"
+            android:id="@+id/btn_register"
             android:layout_width="304dp"
             android:layout_height="47dp"
             android:layout_marginTop="16dp"
             android:text="@string/action_register"
             
-            app:layout_constraintEnd_toEndOf="@+id/button_forgot_password"
-            app:layout_constraintStart_toStartOf="@+id/button_forgot_password"
-            app:layout_constraintTop_toBottomOf="@+id/button_forgot_password" />
+            app:layout_constraintEnd_toEndOf="@+id/btn_password_forgot"
+            app:layout_constraintStart_toStartOf="@+id/btn_password_forgot"
+            app:layout_constraintTop_toBottomOf="@+id/btn_password_forgot" />
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

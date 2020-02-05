@@ -23,7 +23,9 @@
     <string name="repeat_password_register">Repeat your password</string>
     <string name="registration_text">Registration</string>
     <string name="action_submit">SUBMIT</string>
-
-
- 
+  <!-- Misc [warning and errors]-->
+  <string name="warn_implementation_need">To be implemented</string>
+  <string name="err_login_fail">Failed to log in!</string>
+  <string name="err_empty">Fields should not be empty!</string>
+  <string name="err_not_match">Fields do not match!</string>
 </resources>
