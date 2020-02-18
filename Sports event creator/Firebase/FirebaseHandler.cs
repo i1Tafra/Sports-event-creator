@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using Firebase;
 using Firebase.Auth;
+using Firebase.Firestore;
 
 namespace SportsEventCreator.Firebase
 {
@@ -18,11 +19,13 @@ namespace SportsEventCreator.Firebase
     {
         private FirebaseApp App { get;} 
         public FirebaseAuth Auth { get;}
+        public FirebaseFirestore Firestore { get; }
 
         private FirebaseHandler(Context context)
         {
             App = FirebaseApp.InitializeApp(context);
             Auth = FirebaseAuth.GetInstance(App);
+            Firestore = FirebaseFirestore.GetInstance(App);
         }
 
         public static void Init(Context context)

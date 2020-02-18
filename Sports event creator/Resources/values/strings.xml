@@ -23,10 +23,11 @@
     <string name="repeat_password_register">Repeat your password</string>
     <string name="registration_text">Registration</string>
     <string name="action_submit">SUBMIT</string>
-  <!-- Misc [warning and errors]-->
+  <!-- Misc [info, warning and errors]-->
   <string name="warn_implementation_need">To be implemented</string>
   <string name="err_login_fail">Failed to log in!</string>
   <string name="err_empty">Fields should not be empty!</string>
   <string name="err_not_match">Fields do not match!</string>
   <string name="err_weak_pass">Password is too weak.\n Password should contain uppercase, lowercase and digit.\n Password should not be less than 8 characters!</string>
+  <string name="info_deleted">Deleted</string>
 </resources>

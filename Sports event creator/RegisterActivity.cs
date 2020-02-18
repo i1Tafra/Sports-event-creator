@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using Firebase;
 using Firebase.Auth;
+using SportsEventCreator.Database;
 using SportsEventCreator.Firebase;
 using Xamarin.Essentials;
 
@@ -29,7 +30,7 @@ namespace SportsEventCreator
 
         private Button btnSumbit;
 
-        private static uint MIN_PASSWORD_LENGTH = 8;
+        private const uint MIN_PASSWORD_LENGTH = 8;
         #endregion
 
         private void InitGUIElements()
@@ -71,6 +72,7 @@ namespace SportsEventCreator
             };
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "I am using 'using' statement, variable should be disposed automatically")]
         private async void RegisterUser()
         {
             try
@@ -87,6 +89,7 @@ namespace SportsEventCreator
                 .UpdateProfileAsync(profile)
                 .ConfigureAwait(false);
 
+                await DatabaseManager.AddUser(new UserProfile(editUsername.Text, editMail.Text)).ConfigureAwait(false);
                 StartActivity(typeof(MainActivity));
                 Finish();
             }
