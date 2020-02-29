@@ -23,11 +23,27 @@
     <string name="repeat_password_register">Repeat your password</string>
     <string name="registration_text">Registration</string>
     <string name="action_submit">SUBMIT</string>
-  <!-- Misc [info, warning and errors]-->
-  <string name="warn_implementation_need">To be implemented</string>
-  <string name="err_login_fail">Failed to log in!</string>
-  <string name="err_empty">Fields should not be empty!</string>
-  <string name="err_not_match">Fields do not match!</string>
-  <string name="err_weak_pass">Password is too weak.\n Password should contain uppercase, lowercase and digit.\n Password should not be less than 8 characters!</string>
-  <string name="info_deleted">Deleted</string>
+    <!-- Misc [info, warning and errors]-->
+    <string name="warn_implementation_need">To be implemented</string>
+    <string name="err_login_fail">Failed to log in!</string>
+    <string name="err_empty">Fields should not be empty!</string>
+    <string name="err_not_match">Fields do not match!</string>
+    <string name="err_weak_pass">Password is too weak.\n Password should contain uppercase, lowercase and digit.\n Password should not be less than 8 characters!</string>
+    <string name="info_deleted">Deleted</string>
+   <!-- Strings related to navigation drawer -->
+    <string name="nav_menu_main">Main</string>
+    <string name="nav_menu_actions">Actions</string>
+    <string name="nav_menu_social">Social</string>
+    <string name="nav_main_events">Events</string>
+    <string name="nav_main_my_groups">My Groups</string>
+    <string name="nav_actions_events">Create new event</string>
+    <string name="nav_actions_groups">Create new group</string>
+    <string name="nav_actions_add_to_group">Add to group</string>
+    <string name="nav_social_share">Share</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
 </resources>
