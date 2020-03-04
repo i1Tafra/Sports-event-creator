@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
+﻿using Android.Content;
 using Android.Preferences;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
 namespace SportsEventCreator
 {
@@ -19,8 +9,8 @@ namespace SportsEventCreator
         private readonly ISharedPreferencesEditor prefsEditor;
         private readonly Context context;
 
-        private const String USERNAME = "USERNAME";
-        private const String PASSWORD = "PASSWORD";
+        private const string USERNAME = "USERNAME";
+        private const string PASSWORD = "PASSWORD";
 
         public AppSettings(Context context)
         {
@@ -30,14 +20,14 @@ namespace SportsEventCreator
         }
 
         public string Username
-        { 
-            set 
-            { 
+        {
+            set
+            {
                 prefsEditor.PutString(USERNAME, value);
-                prefsEditor.Commit(); 
+                prefsEditor.Commit();
             }
 
-            get => sharedPrefs.GetString(USERNAME, String.Empty);
+            get => sharedPrefs.GetString(USERNAME, string.Empty);
         }
 
         public string Password
@@ -48,7 +38,7 @@ namespace SportsEventCreator
                 prefsEditor.Commit();
             }
 
-            get => sharedPrefs.GetString(PASSWORD, String.Empty);
+            get => sharedPrefs.GetString(PASSWORD, string.Empty);
         }
 
     }

@@ -1,14 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
 namespace SportsEventCreator.Database
 {
@@ -24,14 +15,15 @@ namespace SportsEventCreator.Database
         public User Creator { get; set; }
         public string Location { get; set; }
         public DateTimeOffset Date { get; set; }
+        //TODO: This is not possible to write in firestore, reimplement
         public SportType EventType { get; set; }
 
         private readonly List<EventUser> _users = new List<EventUser>();
-        public List<EventUser> Users { get => _users; }
+        public List<EventUser> Users => _users;
 
         public void AddUser(User user)
         {
-            var eventUser = new EventUser(user);
+            EventUser eventUser = new EventUser(user);
             if (ValidateUserUnique(eventUser))
                 _users.Add(eventUser);
         }
@@ -39,6 +31,11 @@ namespace SportsEventCreator.Database
         private bool ValidateUserUnique(EventUser user)
         {
             return !Users.Contains(user);
+        }
+
+        private static SportType ParseSportType(string value)
+        {
+            return (SportType)Enum.Parse(typeof(SportType), value, true);
         }
     }
 }

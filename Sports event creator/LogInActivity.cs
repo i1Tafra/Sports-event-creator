@@ -1,23 +1,12 @@
 ﻿using Android.App;
 using Android.OS;
-using Android.Support.V7.App;
 using Android.Runtime;
 using Android.Widget;
-using System;
-using Android;
-using Android.Content.PM;
-using Android.Support.V4.App;
-using Firebase.Auth;
 using Firebase;
-using Android.Support.Design.Widget;
-using Android.Support.Constraints;
-using System.Threading.Tasks;
-using Android.Gms.Tasks;
-using SportsEventCreator.Firebase;
-using Xamarin.Essentials;
-using Plugin.CloudFirestore;
 using SportsEventCreator.Database;
-using System.Collections.Generic;
+using SportsEventCreator.Firebase;
+using System;
+using Xamarin.Essentials;
 
 namespace SportsEventCreator
 {
@@ -55,7 +44,7 @@ namespace SportsEventCreator
         private async void TEST()
         {
             // for testing
-            var sevent = new SportEvent()
+            SportEvent sevent = new SportEvent()
             {
                 Date = DateTime.Now,
                 Location = "Iza moje kuce 34",
@@ -79,20 +68,22 @@ namespace SportsEventCreator
             InitGUIElements();
             InitBtnClickListeners();
             LoadUsernamePassword();
-           // TEST();
+            // TEST();
         }
 
         private void InitBtnClickListeners()
         {
             btnSignIn.Click += (sender, e) =>
             {
+                btnSignIn.Enabled = false;
                 if (ValidateInput())
                     LogInUser();
+                btnSignIn.Enabled = true;
             };
 
             btnDelete.Click += (sender, e) =>
             {
-                SaveUsernamePassword(String.Empty, String.Empty);
+                SaveUsernamePassword(string.Empty, string.Empty);
                 Toast.MakeText(ApplicationContext, Resource.String.info_deleted, ToastLength.Short)
                 .Show();
             };
@@ -111,8 +102,8 @@ namespace SportsEventCreator
 
         private bool ValidateInput()
         {
-            if (String.IsNullOrEmpty(editUsername.Text) ||
-                String.IsNullOrEmpty(editPassword.Text))
+            if (string.IsNullOrEmpty(editUsername.Text) 
+                || string.IsNullOrEmpty(editPassword.Text))
             {
                 Toast.MakeText(ApplicationContext, Resource.String.err_empty, ToastLength.Short)
                 .Show();
@@ -126,10 +117,12 @@ namespace SportsEventCreator
             try
             {
                 await FirebaseHandler.Instance.Auth
-               .SignInWithEmailAndPasswordAsync(editUsername.Text, editPassword.Text)
-               .ConfigureAwait(false);
+                    .SignInWithEmailAndPasswordAsync(editUsername.Text, editPassword.Text)
+                    .ConfigureAwait(false);
 
                 SaveUsernamePassword(editUsername.Text, editPassword.Text);
+                Instance.LoadUserData(editUsername.Text);
+
                 StartActivity(typeof(MainActivity));
                 Finish();
             }
@@ -137,13 +130,17 @@ namespace SportsEventCreator
             {
                 MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    Toast.MakeText(ApplicationContext, excepion.Message, ToastLength.Short)
-                  .Show();
+                   Toast.MakeText(ApplicationContext, excepion.Message, ToastLength.Short).Show();
                 });
 
             }
         }
 
+        /// <summary>
+        /// Save username and password in application settings so next time user can easly login
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
         private void SaveUsernamePassword(string username, string password)
         {
             _ = new AppSettings(this)
@@ -153,9 +150,12 @@ namespace SportsEventCreator
             };
         }
 
+        /// <summary>
+        /// Load previously saved username and password from user, or String.Empty on GUI elements
+        /// </summary>
         private void LoadUsernamePassword()
         {
-            var appSetting = new AppSettings(this);
+            AppSettings appSetting = new AppSettings(this);
             editUsername.Text = appSetting.Username;
             editPassword.Text = appSetting.Password;
         }

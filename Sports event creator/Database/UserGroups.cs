@@ -1,28 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
 namespace SportsEventCreator.Database
 {
     public class UserGroups
     {
+        /// <summary>
+        /// Used by firestore
+        /// </summary>
+        public UserGroups() { }
+
+        public UserGroups(string username, string email)
+        {
+            Creator = new User(username, email);
+        }
+
         public User Creator { get; set; }
 
-        private readonly List<Group> _groups = new List<Group>();
-        public List<Group> Groups { get => _groups; }
+        public List<Group> Groups { get; internal set; } = new List<Group>();
 
-        public void AddGroup(Group group)
+        internal void AddGroup(Group group)
         {
             if (ValidateGroupUnique(group))
-                _groups.Add(group);
+                Groups.Add(group);
         }
 
         private bool ValidateGroupUnique(Group group)

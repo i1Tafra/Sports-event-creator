@@ -1,14 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
 namespace SportsEventCreator.Database
 {
@@ -18,5 +8,10 @@ namespace SportsEventCreator.Database
         public UserProfile(string username, string email) : base(username, email)
         {
         }
+
+        /// <summary>
+        /// Used by firestore
+        /// </summary>
+        public UserProfile() { }
     }
 }

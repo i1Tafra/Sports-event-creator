@@ -1,49 +1,68 @@
 <resources>
-    <string name="app_name">Sports_event_creator</string>
-    <string name="action_settings">Settings</string>
-    <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="action_delete_credentials">Delete</string>
-    <string name="welcome">"Welcome !"</string>
-    <string name="invalid_username">Not a valid username</string>
-    <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
-    <string name="enter_email_or_username">Enter your e-mail or username</string>
-    <string name="enter_email">Enter your e-mail</string>
-    <string name="enter_password">Enter your password</string>
-    <string name="forgot_password">Forgot password?</string>
-    <string name="action_register">Register</string>
-    <!-- Strings related to registration -->
-    <string name="username_text">Choose your username</string>
-    <string name="enter_email_register">Enter your e-mail</string>
-    <string name="repeat_email_register">Repeat your e-mail</string>
-    <string name="repeat_password_register">Repeat your password</string>
-    <string name="registration_text">Registration</string>
-    <string name="action_submit">SUBMIT</string>
-    <!-- Misc [info, warning and errors]-->
-    <string name="warn_implementation_need">To be implemented</string>
-    <string name="err_login_fail">Failed to log in!</string>
-    <string name="err_empty">Fields should not be empty!</string>
-    <string name="err_not_match">Fields do not match!</string>
-    <string name="err_weak_pass">Password is too weak.\n Password should contain uppercase, lowercase and digit.\n Password should not be less than 8 characters!</string>
-    <string name="info_deleted">Deleted</string>
-   <!-- Strings related to navigation drawer -->
-    <string name="nav_menu_main">Main</string>
-    <string name="nav_menu_actions">Actions</string>
-    <string name="nav_menu_social">Social</string>
-    <string name="nav_main_events">Events</string>
-    <string name="nav_main_my_groups">My Groups</string>
-    <string name="nav_actions_events">Create new event</string>
-    <string name="nav_actions_groups">Create new group</string>
-    <string name="nav_actions_add_to_group">Add to group</string>
-    <string name="nav_social_share">Share</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+  <string name="app_name">Sports_event_creator</string>
+  <string name="action_settings">Settings</string>
+
+  <!-- Strings related to login -->
+  <string name="prompt_email">Email</string>
+  <string name="prompt_password">Password</string>
+  <string name="action_sign_in">Sign in or register</string>
+  <string name="action_sign_in_short">Sign in</string>
+  <string name="action_delete_credentials">Delete</string>
+  <string name="welcome">"Welcome !"</string>
+  <string name="invalid_username">Not a valid username</string>
+  <string name="invalid_password">Password must be >5 characters</string>
+  <string name="login_failed">"Login failed"</string>
+  <string name="enter_email_or_username">Enter your e-mail or username</string>
+  <string name="enter_email">Enter your e-mail</string>
+  <string name="enter_password">Enter your password</string>
+  <string name="forgot_password">Forgot password?</string>
+  <string name="action_register">Register</string>
+
+  <!-- Strings related to registration -->
+  <string name="username_text">Choose your username</string>
+  <string name="enter_email_register">Enter your e-mail</string>
+  <string name="repeat_email_register">Repeat your e-mail</string>
+  <string name="repeat_password_register">Repeat your password</string>
+  <string name="registration_text">Registration</string>
+  <string name="action_submit">SUBMIT</string>
+
+  <!-- Strings related to navigation drawer -->
+  <string name="nav_menu_main">Main</string>
+  <string name="nav_menu_actions">Actions</string>
+  <string name="nav_menu_social">Social</string>
+  <string name="nav_main_events">Events</string>
+  <string name="nav_main_my_groups">My Groups</string>
+  <string name="nav_actions_events">Create new event</string>
+  <string name="nav_actions_groups">Create new group</string>
+  <string name="nav_actions_add_to_group">Add to group</string>
+  <string name="nav_social_share">Share</string>
+  <string name="navigation_drawer_open">Open navigation drawer</string>
+  <string name="navigation_drawer_close">Close navigation drawer</string>
+  <string name="nav_header_title">Android Studio</string>
+  <string name="nav_header_subtitle">android.studio@android.com</string>
+  <string name="nav_header_desc">Navigation header</string>
+
+  <!-- Strings related to creating new group -->
+  <string name="new_group_text">Create new group</string>
+  <string name="name_text">Name:</string>
+  <string name="hint_group_name">Choose group name</string>
+  <string name="btn_add_user">Add user to group</string>
+  <string name="action_create">Create group</string>
+  <string name="users">Users:</string>
+  <string name="dialog_title_create_user">"Insert username or email to add user"</string>
+  <string name="dialog_create_user">Add user</string>
+  <string name="dialog_cancel">Cancel</string>
+
+  <!-- Misc [info, warning and errors]-->
+  <string name="warn_implementation_need">To be implemented</string>
+  <string name="err_login_fail">Failed to log in!</string>
+  <string name="err_empty">Fields should not be empty!</string>
+  <string name="err_not_match">Fields do not match!</string>
+  <string name="err_weak_pass">Password is too weak.\n Password should contain uppercase, lowercase and digit.\n Password should not be less than 8 characters!</string>
+  <string name="err_failed_to_save_firestore">Failed to save data to firestore. Try again</string>
+  <string name="info_deleted">Deleted</string>
+  <string name="info_firestore_success">Data stored successuly</string>
+  <string name="info_user_not_found">User not found</string>
+  <string name="info_user_added">User added</string>
 
 </resources>

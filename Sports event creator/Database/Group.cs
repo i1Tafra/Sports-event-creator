@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using System.Collections.Generic;
 
 namespace SportsEventCreator.Database
 {
@@ -16,13 +6,12 @@ namespace SportsEventCreator.Database
     {
         public string Name { get; set; }
 
-        private readonly List<User> _users = new List<User>();
-        public List<User> Users { get => _users; }
+        public List<User> Users { get; set; } = new List<User>();
 
-        public void AddUser(User user)
+        internal void AddUser(User user)
         {
             if (ValidateUserUnique(user))
-                _users.Add(user);
+                Users.Add(new User(user));
         }
 
         private bool ValidateUserUnique(User user)

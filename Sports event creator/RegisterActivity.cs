@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Android;
-using Android.App;
-using Android.Content;
-using Android.Gms.Tasks;
+﻿using Android.App;
+//using Android.Gms.Tasks;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Firebase;
 using Firebase.Auth;
 using SportsEventCreator.Database;
 using SportsEventCreator.Firebase;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace SportsEventCreator
@@ -57,18 +52,18 @@ namespace SportsEventCreator
         {
             btnSumbit.Click += (sender, e) =>
             {
+                btnSumbit.Enabled = false;
                 if (ValidateInput() && ValidatePasswordComplexity())
-                {
                     RegisterUser();
+                btnSumbit.Enabled = true;
 
-                    ///TODO: Research how to implement email verification
-                    /*using var user = authResult.User;
-                    using var actionCode = ActionCodeSettings.NewBuilder()
-                    .SetAndroidPackageName(PackageName, true, "0")
-                    .SetUrl("https://sport-event-creator.firebaseapp.com/__/auth/action")
-                    .Build();
-                    await user.SendEmailVerificationAsync(actionCode).ConfigureAwait(true);*/
-                }
+                ///TODO: Research how to implement email verification
+                /*using var user = authResult.User;
+                using var actionCode = ActionCodeSettings.NewBuilder()
+                .SetAndroidPackageName(PackageName, true, "0")
+                .SetUrl("https://sport-event-creator.firebaseapp.com/__/auth/action")
+                .Build();
+                await user.SendEmailVerificationAsync(actionCode).ConfigureAwait(true);*/
             };
         }
 
@@ -77,11 +72,14 @@ namespace SportsEventCreator
         {
             try
             {
-                using var authResult = await FirebaseHandler.Instance.Auth
+                //editMail.Text = "test_16@test.com";
+                //editUsername.Text = "TESTuSER";
+                //editPassword.Text = "Tafra123";
+                using IAuthResult authResult = await FirebaseHandler.Instance.Auth
                 .CreateUserWithEmailAndPasswordAsync(editMail.Text, editPassword.Text)
                 .ConfigureAwait(false);
 
-                using var profile = new UserProfileChangeRequest.Builder()
+                using UserProfileChangeRequest profile = new UserProfileChangeRequest.Builder()
                .SetDisplayName(editUsername.Text)
                .Build();
 
@@ -89,9 +87,28 @@ namespace SportsEventCreator
                 .UpdateProfileAsync(profile)
                 .ConfigureAwait(false);
 
-                await DatabaseManager.AddUser(new UserProfile(editUsername.Text, editMail.Text)).ConfigureAwait(false);
-                StartActivity(typeof(MainActivity));
-                Finish();
+                UserProfile up = new UserProfile(editUsername.Text, editMail.Text);
+                UserGroups ug = new UserGroups()
+                {
+                    Creator = new User(up)
+                };
+
+                System.Collections.Generic.List<Task> tasks = Instance.InitFirestoreUser(editUsername.Text, editMail.Text);
+                Task.WaitAll(tasks.ToArray());
+                if (tasks.All(t => t.IsCompletedSuccessfully))
+                {
+                    Instance.LoadUserData(editUsername.Text);
+                    StartActivity(typeof(MainActivity));
+                    Finish();
+                }
+                else
+                {
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        Toast.MakeText(ApplicationContext, Resource.String.err_failed_to_save_firestore, ToastLength.Short)
+                      .Show();
+                    });
+                }
             }
             catch (FirebaseException excepion)
             {
@@ -105,25 +122,27 @@ namespace SportsEventCreator
 
         private bool ValidatePasswordComplexity()
         {
-            var pass = editPassword.Text;
+            string pass = editPassword.Text;
 
-            var result = (pass.Any(char.IsUpper) &&
+            bool result = (pass.Any(char.IsUpper) &&
                 pass.Any(char.IsLower) &&
                 pass.Any(char.IsDigit) &&
                 pass.Length >= MIN_PASSWORD_LENGTH);
 
             if (!result)
+            {
                 Toast.MakeText(ApplicationContext, Resource.String.err_weak_pass, ToastLength.Short)
                 .Show();
+            }
 
             return result;
         }
 
         private bool ValidateInput()
         {
-            if (String.IsNullOrEmpty(editUsername.Text) ||
-                String.IsNullOrEmpty(editPassword.Text) ||
-                String.IsNullOrEmpty(editMail.Text))
+            if (string.IsNullOrEmpty(editUsername.Text) ||
+                string.IsNullOrEmpty(editPassword.Text) ||
+                string.IsNullOrEmpty(editMail.Text))
             {
                 Toast.MakeText(ApplicationContext, Resource.String.err_empty, ToastLength.Short)
                 .Show();
