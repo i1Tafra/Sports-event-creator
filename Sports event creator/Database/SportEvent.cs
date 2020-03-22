@@ -6,7 +6,7 @@ namespace SportsEventCreator.Database
     public enum SportType
     {
         Football,
-        Tenis,
+        Tennis,
         Basketball
     };
 
