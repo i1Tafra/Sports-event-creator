@@ -35,7 +35,6 @@ namespace SportsEventCreator
         {
             var item = items[position];
 
-            // Replace the contents of the view with that element
             var holder = viewHolder as UserGroupsAdapterViewHolder;
             holder.Name.Text = item.Name;
             holder.UserCount.Text = item.Users.Count.ToString("G", CultureInfo.CurrentCulture);
@@ -52,7 +51,6 @@ namespace SportsEventCreator
     {
         public TextView Name { get; set; }
         public TextView UserCount { get; set; }
-
 
         public UserGroupsAdapterViewHolder(View itemView, Action<UserGroupsAdapterClickEventArgs> clickListener,
                             Action<UserGroupsAdapterClickEventArgs> longClickListener) : base(itemView)

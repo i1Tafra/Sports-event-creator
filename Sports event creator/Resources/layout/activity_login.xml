@@ -30,7 +30,8 @@
             app:layout_constraintEnd_toStartOf="@+id/btn_delete"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/edit_password"
-            app:layout_constraintTop_toBottomOf="@+id/edit_password" />
+            app:layout_constraintTop_toBottomOf="@+id/edit_password"
+            android:enabled="true" />
 
         <Button
             android:background="@drawable/back"

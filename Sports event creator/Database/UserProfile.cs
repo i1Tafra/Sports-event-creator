@@ -1,10 +1,16 @@
-﻿using System;
+﻿using Plugin.CloudFirestore.Attributes;
+using System;
 
 namespace SportsEventCreator.Database
 {
     public class UserProfile : User
     {
-        public DateTimeOffset DateCreated { get; set; } = DateTime.Now;
+        [Id]
+        public string Id { get; set; }
+        [ServerTimestamp(CanReplace = false)]
+        public DateTimeOffset DateCreated { get; set; }
+        [ServerTimestamp]
+        public DateTimeOffset LastLogin { get; set; }
         public UserProfile(string username, string email) : base(username, email)
         {
         }

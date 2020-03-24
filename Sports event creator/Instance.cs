@@ -8,9 +8,9 @@ namespace SportsEventCreator
     internal static class Instance
     {
         internal static UserProfile User { get; set; }
-        internal static string UserDocumentId { get; set; }
         internal static UserGroups UserGroups { get; set; }
-        internal static string UserGroupsDocumentId { get; set; }
+
+        internal static List<SportEvent> Events { get; set; }
 
         /// <summary>
         /// Load User data from firestore. 
@@ -23,13 +23,11 @@ namespace SportsEventCreator
                 .ConfigureAwait(false);
 
             Instance.User = snapshot.ToObjects<UserProfile>().FirstOrDefault();
-            Instance.UserDocumentId = snapshot.Documents.FirstOrDefault()?.Id;
 
             snapshot = await DatabaseManager.GetUserGroups(User)
                 .ConfigureAwait(false);
 
             Instance.UserGroups = snapshot.ToObjects<UserGroups>().FirstOrDefault();
-            Instance.UserGroupsDocumentId = snapshot.Documents.FirstOrDefault()?.Id;
         }
 
         /// <summary>

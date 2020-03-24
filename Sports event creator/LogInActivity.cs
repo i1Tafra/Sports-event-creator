@@ -33,7 +33,9 @@ namespace SportsEventCreator
             btnDelete = FindViewById<Button>(Resource.Id.btn_delete);
             btnForgetPass = FindViewById<Button>(Resource.Id.btn_password_forgot);
             btnRegister = FindViewById<Button>(Resource.Id.btn_register);
-
+            btnSignIn.Enabled = true;
+            btnSignIn.Enabled = false;
+            btnSignIn.Enabled = true;
         }
 
         private void InitFirebase()
@@ -47,15 +49,16 @@ namespace SportsEventCreator
             SportEvent sevent = new SportEvent()
             {
                 Date = DateTime.Now,
-                Location = "Iza moje kuce 34",
+                Location = "Iza moje kuce 46",
                 EventType = SportType.Basketball,
-                Creator = new User("Bonm", "jakov@hotmail.com")
+                Creator = Instance.User
             };
             sevent.AddUser(new User("Josip", "joko@toki.com"));
             sevent.AddUser(new User("Toki", "joko@toki.com"));
             sevent.AddUser(new User("Karlo", "joko@toki.com"));
             sevent.AddUser(new User("Zvonki", "joko@toki.com"));
             sevent.AddUser(new User("Karlo", "joko@toki.com"));
+            sevent.AddUser(Instance.User);
             await DatabaseManager.AddSportEvent(sevent).ConfigureAwait(false);
         }
 
@@ -68,7 +71,6 @@ namespace SportsEventCreator
             InitGUIElements();
             InitBtnClickListeners();
             LoadUsernamePassword();
-            // TEST();
         }
 
         private void InitBtnClickListeners()
@@ -123,6 +125,7 @@ namespace SportsEventCreator
                 SaveUsernamePassword(editUsername.Text, editPassword.Text);
                 Instance.LoadUserData(editUsername.Text);
 
+                TEST();
                 StartActivity(typeof(MainActivity));
                 Finish();
             }

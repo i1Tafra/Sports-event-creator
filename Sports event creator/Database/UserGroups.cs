@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.CloudFirestore.Attributes;
+using System;
 using System.Collections.Generic;
 
 namespace SportsEventCreator.Database
@@ -14,6 +15,9 @@ namespace SportsEventCreator.Database
         {
             Creator = new User(username, email);
         }
+
+        [Id]
+        public string DocumentId { get; set; }
 
         public User Creator { get; set; }
 

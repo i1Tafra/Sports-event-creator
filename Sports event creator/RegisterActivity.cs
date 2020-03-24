@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Widget;
 using Firebase;
 using Firebase.Auth;
+using Plugin.CloudFirestore;
 using SportsEventCreator.Database;
 using SportsEventCreator.Firebase;
 using System;
@@ -26,6 +27,8 @@ namespace SportsEventCreator
         private Button btnSumbit;
 
         private const uint MIN_PASSWORD_LENGTH = 8;
+        private const uint MIN_USERNAME_LENGTH = 3;
+        private const uint MAX_USERNAME_LENGTH = 30;
         #endregion
 
         private void InitGUIElements()
@@ -53,7 +56,10 @@ namespace SportsEventCreator
             btnSumbit.Click += (sender, e) =>
             {
                 btnSumbit.Enabled = false;
-                if (ValidateInput() && ValidatePasswordComplexity())
+                if (ValidateInput() 
+                && ValidatePasswordComplexity() 
+                && ValidateUsernameFormat()
+                && ValidateUsernameUnique())
                     RegisterUser();
                 btnSumbit.Enabled = true;
 
@@ -120,6 +126,40 @@ namespace SportsEventCreator
             }
         }
 
+        private async Task<IQuerySnapshot> GetUser()
+        {
+            string username = editUsername.Text;
+
+            return await DatabaseManager
+                .GetUser(username)
+                .ConfigureAwait(false);
+        }
+
+        private bool ValidateUsernameUnique()
+        {
+
+            var userTask = GetUser();
+            Instance.User = userTask.Result.ToObjects<UserProfile>().FirstOrDefault();
+
+            if (Instance.User == null)
+                return true;
+
+            return false;
+        }
+
+
+        private bool ValidateUsernameFormat()
+        {
+            string username = editUsername.Text;
+
+            if (username.Length < MIN_USERNAME_LENGTH 
+                || username.Length > MAX_USERNAME_LENGTH
+                || username.Contains('@', StringComparison.Ordinal))
+                return false;
+
+            return true;
+        }
+
         private bool ValidatePasswordComplexity()
         {
             string pass = editPassword.Text;
@@ -140,9 +180,9 @@ namespace SportsEventCreator
 
         private bool ValidateInput()
         {
-            if (string.IsNullOrEmpty(editUsername.Text) ||
-                string.IsNullOrEmpty(editPassword.Text) ||
-                string.IsNullOrEmpty(editMail.Text))
+            if (string.IsNullOrEmpty(editUsername.Text)
+                || string.IsNullOrEmpty(editPassword.Text)
+                || string.IsNullOrEmpty(editMail.Text))
             {
                 Toast.MakeText(ApplicationContext, Resource.String.err_empty, ToastLength.Short)
                 .Show();

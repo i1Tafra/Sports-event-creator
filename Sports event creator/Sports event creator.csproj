@@ -73,9 +73,10 @@
     <Compile Include="Database\UserGroups.cs" />
     <Compile Include="Database\UserProfile.cs" />
     <Compile Include="CreateNewEventFragment.cs" />
+    <Compile Include="EventAdapter.cs" />
     <Compile Include="Instance.cs" />
     <Compile Include="MessageFragment.cs" />
-    <Compile Include="MyGroupsFragment.cs" />
+    <Compile Include="UserGroupsFragment.cs" />
     <Compile Include="Firebase\FirebaseHandler.cs" />
     <Compile Include="LogInActivity.cs" />
     <Compile Include="MainActivity.cs" />
@@ -215,7 +216,7 @@
     <AndroidResource Include="Resources\layout\fragment_events.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\fragment_my_groups.xml" />
+    <AndroidResource Include="Resources\layout\fragment_user_groups.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\fragment_create_new_event.xml" />
@@ -228,6 +229,12 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\item_group.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\item_event.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

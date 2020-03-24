@@ -7,7 +7,7 @@ using Fragment = Android.Support.V4.App.Fragment;
 
 namespace SportsEventCreator.Resources
 {
-    internal class MyGroupsFragment : Fragment
+    internal class UserGroupsFragment : Fragment
     {
 
         #region Properties and variables
@@ -30,7 +30,7 @@ namespace SportsEventCreator.Resources
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            view = inflater.Inflate(Resource.Layout.fragment_my_groups, container, false);
+            view = inflater.Inflate(Resource.Layout.fragment_user_groups, container, false);
             InitGUIElements(view);
             InitBtnClickListeners();
             return view;

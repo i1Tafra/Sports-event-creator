@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.CloudFirestore.Attributes;
+using System;
 using System.Collections.Generic;
 
 namespace SportsEventCreator.Database
@@ -12,11 +13,19 @@ namespace SportsEventCreator.Database
 
     public class SportEvent
     {
+        [Id]
+        public string DocumentId { get; set; }
         public User Creator { get; set; }
         public string Location { get; set; }
         public DateTimeOffset Date { get; set; }
+        public string EventTypeName { get; set; }
         //TODO: This is not possible to write in firestore, reimplement
-        public SportType EventType { get; set; }
+        [Ignored]
+        internal SportType EventType 
+        {
+           get => ParseSportType(EventTypeName);
+           set => EventTypeName = value.ToString(); 
+        }
 
         private readonly List<EventUser> _users = new List<EventUser>();
         public List<EventUser> Users => _users;

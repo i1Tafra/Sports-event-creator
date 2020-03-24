@@ -66,7 +66,7 @@ namespace SportsEventCreator
                 case Resource.Id.nav_my_groups:
                     SupportFragmentManager
                         .BeginTransaction()
-                        .Replace(Resource.Id.fragment_container, new MyGroupsFragment())
+                        .Replace(Resource.Id.fragment_container, new UserGroupsFragment())
                         .Commit();
                     break;
                 case Resource.Id.nav_create_new_event:

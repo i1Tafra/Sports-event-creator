@@ -43,7 +43,7 @@ namespace SportsEventCreator.Resources
 
         private void InitBtnClickListeners()
         {
-            btnAddUser.Click += async (sender, e) =>
+            btnAddUser.Click += (sender, e) =>
             {
                 ShowAddUserDialog();
             };
@@ -54,7 +54,7 @@ namespace SportsEventCreator.Resources
                 // prefer to validate as user type group name, disable Create button if validation fails
                 group.Name = editName.Text;
                 Instance.UserGroups.AddGroup(group);
-                var updateTask = DatabaseManager.UpdateUserGroups(Instance.UserGroupsDocumentId, Instance.UserGroups);
+                var updateTask = DatabaseManager.UpdateUserGroups(Instance.UserGroups.DocumentId, Instance.UserGroups);
                 await updateTask.ConfigureAwait(true);
 
                 if (updateTask.IsCompletedSuccessfully)
