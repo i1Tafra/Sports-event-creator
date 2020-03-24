@@ -53,6 +53,19 @@
   <string name="dialog_create_user">Add user</string>
   <string name="dialog_cancel">Cancel</string>
 
+  <!-- Strings related to creating new event -->
+  <string name="new_event_fragment_create">Create new event</string>
+  <string name="new_event_fragment_choose_sport">Choose sport</string>
+  <string name="new_event_fragment_time">Choose prefered date and time</string>
+  <string name="new_event_fragment_location">Select prefered location</string>
+  <string name="pick_location">Pick location</string>
+  <string name="pick_time">Pick time</string>
+  <string name="pick_date">Pick date</string>
+  <string name="new_event_fragment_range">Choose min and max number of required players</string>
+  <string name="pick_min">Pick min number</string>
+  <string name="pick_max">Pick max number</string>
+  <string name="submit">Share event</string>
+
   <!-- Misc [info, warning and errors]-->
   <string name="warn_implementation_need">To be implemented</string>
   <string name="err_login_fail">Failed to log in!</string>

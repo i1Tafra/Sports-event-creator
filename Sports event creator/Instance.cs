@@ -10,7 +10,7 @@ namespace SportsEventCreator
         internal static UserProfile User { get; set; }
         internal static UserGroups UserGroups { get; set; }
 
-        internal static List<SportEvent> Events { get; set; }
+        internal static List<SportEvent> Events { get; set; } = new List<SportEvent>();
 
         /// <summary>
         /// Load User data from firestore. 

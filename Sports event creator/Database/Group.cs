@@ -18,5 +18,10 @@ namespace SportsEventCreator.Database
         {
             return !Users.Contains(user);
         }
+
+        public override string ToString()
+        {
+            return $"{Name} [{Users.Count}]";
+        }
     }
 }
