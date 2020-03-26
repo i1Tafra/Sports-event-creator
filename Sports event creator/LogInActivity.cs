@@ -125,7 +125,6 @@ namespace SportsEventCreator
                 SaveUsernamePassword(editUsername.Text, editPassword.Text);
                 Instance.LoadUserData(editUsername.Text);
 
-                TEST();
                 StartActivity(typeof(MainActivity));
                 Finish();
             }

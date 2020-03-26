@@ -27,14 +27,13 @@ namespace SportsEventCreator.Database
            set => EventTypeName = value.ToString(); 
         }
 
-        private readonly List<EventUser> _users = new List<EventUser>();
-        public List<EventUser> Users => _users;
+        public List<EventUser> Users { get; set; } = new List<EventUser>();
 
         public void AddUser(User user)
         {
             EventUser eventUser = new EventUser(user);
             if (ValidateUserUnique(eventUser))
-                _users.Add(eventUser);
+                Users.Add(eventUser);
         }
 
         private bool ValidateUserUnique(EventUser user)

@@ -13,6 +13,8 @@ namespace SportsEventCreator.Database
         private const string ATTRIBUTE_USER_GROUPS_CREATOR = "Creator";
         private const string ATTRIBUTE_USER_USERNAME_ = "Username";
         private const string ATTRIBUTE_USER_EMAIL_ = "Email";
+        private const string ATTRIBUTE_USERS = "Users";
+        private const string ATTRIBUTE_DATE = "Date";
 
         #region user profile
         /// <summary>
@@ -31,15 +33,14 @@ namespace SportsEventCreator.Database
         /// <summary>
         /// Update user profile with provided userm param based on document id
         /// </summary>
-        /// <param name="documentId"></param>
         /// <param name="groups"></param>
         /// <returns></returns>
-        internal static Task UpdateUser(string documentId, UserProfile user)
+        internal static Task UpdateUser( UserProfile user)
         {
             return CrossCloudFirestore.Current
                          .Instance
                          .GetCollection(COLLECTION_USER)
-                         .GetDocument(documentId)
+                         .GetDocument(user.DocumentId)
                          .UpdateDataAsync(user);
         }
 
@@ -83,15 +84,14 @@ namespace SportsEventCreator.Database
         /// <summary>
         /// Update user groups with provided groups param based on document id
         /// </summary>
-        /// <param name="documentId"></param>
         /// <param name="groups"></param>
         /// <returns></returns>
-        internal static Task UpdateUserGroups(string documentId, UserGroups groups)
+        internal static Task UpdateUserGroups(UserGroups groups)
         {
             return CrossCloudFirestore.Current
                          .Instance
                          .GetCollection(COLLECTION_USER_GROUPS)
-                         .GetDocument(documentId)
+                         .GetDocument(groups.DocumentId)
                          .UpdateDataAsync(groups);
         }
 
@@ -113,6 +113,7 @@ namespace SportsEventCreator.Database
         }
         #endregion
 
+        #region Events
         /// <summary>
         /// Add new sport event in firestore
         /// </summary>
@@ -127,5 +128,37 @@ namespace SportsEventCreator.Database
                 .AddDocumentAsync(sportEvent);
         }
 
+        /// <summary>
+        /// Update sport event with provided sport event param based on document id
+        /// </summary>
+        /// <param name="sportEvent"></param>
+        /// <returns></returns>
+        internal static Task UpdateSportEvent(SportEvent sportEvent)
+        {
+            return CrossCloudFirestore.Current
+                         .Instance
+                         .GetCollection(COLLETCTION_EVENT)
+                         .GetDocument(sportEvent.DocumentId)
+                         .UpdateDataAsync(sportEvent);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        internal static Task<IQuerySnapshot> GetSportEvents(User user)
+        {
+            User only_user = new EventUser(user);
+            return CrossCloudFirestore.Current
+                                     .Instance
+                                     .GetCollection(COLLETCTION_EVENT)
+                                     .WhereGreaterThan(ATTRIBUTE_DATE, DateTime.Now)
+                                     .WhereArrayContains(ATTRIBUTE_USERS, only_user)
+                                     .LimitTo(5)
+                                     .OrderBy(ATTRIBUTE_DATE)
+                                     .GetDocumentsAsync();
+        }
+        #endregion
     }
 }

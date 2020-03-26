@@ -6,7 +6,7 @@ namespace SportsEventCreator.Database
     public class UserProfile : User
     {
         [Id]
-        public string Id { get; set; }
+        public string DocumentId { get; set; }
         [ServerTimestamp(CanReplace = false)]
         public DateTimeOffset DateCreated { get; set; }
         [ServerTimestamp]

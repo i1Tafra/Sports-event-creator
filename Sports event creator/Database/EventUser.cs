@@ -5,6 +5,10 @@
     /// </summary>
     public class EventUser : User
     {
+        public EventUser()
+        {
+
+        }
         /// <summary>
         /// Gets or sets a value indicating whether IsAttending
         /// </summary>

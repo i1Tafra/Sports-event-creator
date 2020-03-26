@@ -54,7 +54,7 @@ namespace SportsEventCreator.Resources
                 // prefer to validate as user type group name, disable Create button if validation fails
                 group.Name = editName.Text;
                 Instance.UserGroups.AddGroup(group);
-                var updateTask = DatabaseManager.UpdateUserGroups(Instance.UserGroups.DocumentId, Instance.UserGroups);
+                var updateTask = DatabaseManager.UpdateUserGroups(Instance.UserGroups);
                 await updateTask.ConfigureAwait(true);
 
                 if (updateTask.IsCompletedSuccessfully)
