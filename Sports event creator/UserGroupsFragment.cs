@@ -1,7 +1,10 @@
 ﻿using Android.OS;
+using Android.Support.Constraints;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using Plugin.CloudFirestore;
+using SportsEventCreator.Database;
 using System;
 using Fragment = Android.Support.V4.App.Fragment;
 
@@ -33,12 +36,31 @@ namespace SportsEventCreator.Resources
             view = inflater.Inflate(Resource.Layout.fragment_user_groups, container, false);
             InitGUIElements(view);
             InitBtnClickListeners();
+            SetFirestoreListner();
             return view;
+        }
+
+        private void SetFirestoreListner()
+        {
+            CrossCloudFirestore.Current.Instance.GetCollection("UserGroups")
+                           .GetDocument(Instance.UserGroups.DocumentId)
+
+                           .AddSnapshotListener((snapshot, error) =>
+                           {
+                               if (snapshot != null)
+                               {
+                                   var userGroup = snapshot.ToObject<UserGroups>();
+                                   Instance.UserGroups.Groups.Clear();
+                                   Instance.UserGroups.Groups.AddRange(userGroup.Groups);
+                                   rwGroups.GetAdapter().NotifyDataSetChanged();
+                               }
+                           });
         }
 
         private void InitBtnClickListeners()
         {
-            adapter.ItemClick += (sender, e) => {
+            adapter.ItemClick += (sender, e) =>
+            {
                 var extra = e as UserGroupsAdapterClickEventArgs;
                 Toast.MakeText(view.Context, Resource.String.warn_implementation_need, ToastLength.Short).Show();
                 //TODO: Implement details fragment/ activity for group

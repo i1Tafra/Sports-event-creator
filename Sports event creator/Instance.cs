@@ -1,4 +1,5 @@
-﻿using SportsEventCreator.Database;
+﻿using Plugin.CloudFirestore;
+using SportsEventCreator.Database;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,10 +18,10 @@ namespace SportsEventCreator
         /// Loaded items are user profile and user groups, as wll as documents Ids for loaded documents
         /// </summary>
         /// <param name="email">email address</param>
-        internal static async void LoadUserData(string email)
+        internal static async Task<IQuerySnapshot> LoadUserData(string email)
         {
-            Plugin.CloudFirestore.IQuerySnapshot snapshot = await DatabaseManager.GetUser(email)
-                .ConfigureAwait(false);
+            var task = DatabaseManager.GetUser(email);
+            Plugin.CloudFirestore.IQuerySnapshot snapshot = await task.ConfigureAwait(false);
 
             Instance.User = snapshot.ToObjects<UserProfile>().FirstOrDefault();
 
@@ -30,10 +31,11 @@ namespace SportsEventCreator
             Instance.UserGroups = snapshot.ToObjects<UserGroups>().FirstOrDefault();
 
             //TODO: This will add only if user is not attending
-            snapshot = await DatabaseManager.GetSportEvents(User)
-                .ConfigureAwait(false);
+            //snapshot = await DatabaseManager.GetSportEvents(User)
+            //    .ConfigureAwait(false);
 
-            Instance.Events = snapshot.ToObjects<SportEvent>().ToList();
+            //Instance.Events = snapshot.ToObjects<SportEvent>().ToList();
+            return snapshot;
     }
 
         /// <summary>

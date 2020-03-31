@@ -6,6 +6,7 @@ using Firebase;
 using SportsEventCreator.Database;
 using SportsEventCreator.Firebase;
 using System;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace SportsEventCreator
@@ -59,7 +60,7 @@ namespace SportsEventCreator
             sevent.AddUser(new User("Zvonki", "joko@toki.com"));
             sevent.AddUser(new User("Karlo", "joko@toki.com"));
             sevent.AddUser(Instance.User);
-            await DatabaseManager.AddSportEvent(sevent).ConfigureAwait(false);
+            //await DatabaseManager.AddSportEvent(sevent).ConfigureAwait(false);
         }
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -123,7 +124,8 @@ namespace SportsEventCreator
                     .ConfigureAwait(false);
 
                 SaveUsernamePassword(editUsername.Text, editPassword.Text);
-                Instance.LoadUserData(editUsername.Text);
+                var task = Instance.LoadUserData(editUsername.Text);
+                Task.WaitAll(task);
 
                 StartActivity(typeof(MainActivity));
                 Finish();

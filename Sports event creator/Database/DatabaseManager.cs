@@ -1,5 +1,7 @@
-﻿using Plugin.CloudFirestore;
+﻿using Android.Test;
+using Plugin.CloudFirestore;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SportsEventCreator.Database
@@ -11,10 +13,11 @@ namespace SportsEventCreator.Database
         private const string COLLECTION_USER_GROUPS = "UserGroups";
 
         private const string ATTRIBUTE_USER_GROUPS_CREATOR = "Creator";
-        private const string ATTRIBUTE_USER_USERNAME_ = "Username";
+        private const string ATTRIBUTE_USER_USERNAME = "Username";
         private const string ATTRIBUTE_USER_EMAIL_ = "Email";
         private const string ATTRIBUTE_USERS = "Users";
         private const string ATTRIBUTE_DATE = "Date";
+        private const string ATTRIBUTE_LOCATION = "Location";
 
         #region user profile
         /// <summary>
@@ -62,7 +65,7 @@ namespace SportsEventCreator.Database
                     .GetDocumentsAsync();
             }
 
-            return query.WhereEqualsTo(ATTRIBUTE_USER_USERNAME_, userID)
+            return query.WhereEqualsTo(ATTRIBUTE_USER_USERNAME, userID)
             .GetDocumentsAsync();
         }
         #endregion
@@ -122,10 +125,11 @@ namespace SportsEventCreator.Database
         internal static Task AddSportEvent(SportEvent sportEvent)
         {
             return CrossCloudFirestore
-                .Current
-                .Instance
-                .GetCollection(COLLETCTION_EVENT)
-                .AddDocumentAsync(sportEvent);
+               .Current
+               .Instance
+               .GetCollection(COLLETCTION_EVENT)
+               .AddDocumentAsync(sportEvent);
+
         }
 
         /// <summary>
@@ -147,9 +151,11 @@ namespace SportsEventCreator.Database
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        internal static Task<IQuerySnapshot> GetSportEvents(User user)
+        internal static Task<IQuerySnapshot> GetSportEvents(User user, bool is_attending = false)
         {
-            User only_user = new EventUser(user);
+            EventUser only_user = new EventUser(user);
+            only_user.IsAttending = is_attending;
+
             return CrossCloudFirestore.Current
                                      .Instance
                                      .GetCollection(COLLETCTION_EVENT)
@@ -157,6 +163,18 @@ namespace SportsEventCreator.Database
                                      .WhereArrayContains(ATTRIBUTE_USERS, only_user)
                                      .LimitTo(5)
                                      .OrderBy(ATTRIBUTE_DATE)
+                                     .GetDocumentsAsync();
+        }
+
+        internal static Task<IQuerySnapshot> GetSportEvents(SportEvent sportEvent)
+        {
+            return CrossCloudFirestore.Current
+                                     .Instance
+                                     .GetCollection(COLLETCTION_EVENT)
+                                     .WhereEqualsTo(ATTRIBUTE_USER_GROUPS_CREATOR, sportEvent.Creator)
+                                     .WhereEqualsTo(ATTRIBUTE_DATE, sportEvent.Date)
+                                     .WhereEqualsTo(ATTRIBUTE_LOCATION, sportEvent.Location)
+                                     .LimitTo(1)
                                      .GetDocumentsAsync();
         }
         #endregion

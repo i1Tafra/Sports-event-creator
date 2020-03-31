@@ -10,6 +10,7 @@ using System.Linq;
 using Android.Util;
 using Fragment = Android.Support.V4.App.Fragment;
 using System.Globalization;
+using Android.Gms.Tasks;
 
 namespace SportsEventCreator.Resources
 {
@@ -69,6 +70,10 @@ namespace SportsEventCreator.Resources
 
                 if (addEventTask.IsCompletedSuccessfully)
                 {
+                    var snapshot = await DatabaseManager.GetSportEvents(sportEvent)
+                                    .ConfigureAwait(true);
+                    Instance.Events.Add(snapshot.ToObjects<SportEvent>().FirstOrDefault());
+
                     Toast.MakeText(view.Context, Resource.String.info_firestore_success, ToastLength.Short)
                   .Show();
                 }

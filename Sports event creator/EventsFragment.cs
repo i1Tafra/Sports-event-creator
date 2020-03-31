@@ -1,7 +1,12 @@
-﻿using Android.OS;
+﻿//using Android.Gms.Tasks;
+using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using SportsEventCreator.Database;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Fragment = Android.Support.V4.App.Fragment;
 
 namespace SportsEventCreator.Resources
@@ -29,11 +34,24 @@ namespace SportsEventCreator.Resources
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-
+            LoadFromDatabase();
             view = inflater.Inflate(Resource.Layout.fragment_events, container, false);
             InitGUIElements(view);
             InitBtnClickListeners();
             return view;
+        }
+
+        private async void LoadFromDatabase()
+        {
+            if (Instance.Events.Count > 0)
+                return;
+
+            //TODO: This will add only if user is not attending
+            var snapshot = await DatabaseManager.GetSportEvents(Instance.User).ConfigureAwait(true);
+            Instance.Events.AddRange(snapshot.ToObjects<SportEvent>().ToList());
+            snapshot = await DatabaseManager.GetSportEvents(Instance.User, is_attending: true).ConfigureAwait(true);
+            Instance.Events.AddRange(snapshot.ToObjects<SportEvent>().ToList());
+            rwEvents.GetAdapter().NotifyDataSetChanged();
         }
 
         private void InitBtnClickListeners()
