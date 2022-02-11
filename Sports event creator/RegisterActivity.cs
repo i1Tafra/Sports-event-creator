@@ -53,15 +53,23 @@ namespace SportsEventCreator
 
         private void InitBtnClickListeners()
         {
+
             btnSumbit.Click += (sender, e) =>
             {
                 btnSumbit.Enabled = false;
+
+                //TODO: Remove for DEBUGGING
+                //editMail.Text = editMailRepeat.Text = "test_2022@test.com";
+                //editUsername.Text = "TESTuSER";
+                //editPassword.Text = editPasswordRepeat.Text = "Tafra1234";
+
                 if (ValidateInput() 
                 && ValidatePasswordComplexity() 
                 && ValidateUsernameFormat()
                 && ValidateUsernameUnique())
                     RegisterUser();
                 btnSumbit.Enabled = true;
+                //TODO: No notification if verifcation fails at ValidateUsernameUnique
 
                 ///TODO: Research how to implement email verification
                 /*using var user = authResult.User;
@@ -73,12 +81,11 @@ namespace SportsEventCreator
             };
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Reliability", "CA2000:Dispose objects before losing scope", Justification = "I am using 'using' statement, variable should be disposed automatically")]
         private async void RegisterUser()
         {
             try
             {
-                //editMail.Text = "test_16@test.com";
+                //editMail.Text = "test_2022@test.com";
                 //editUsername.Text = "TESTuSER";
                 //editPassword.Text = "Tafra123";
                 using IAuthResult authResult = await FirebaseHandler.Instance.Auth
@@ -126,20 +133,22 @@ namespace SportsEventCreator
             }
         }
 
-        private async Task<IQuerySnapshot> GetUser()
+        /// <summary>
+        ///  Method will try to obtain a user from a database with name provided in username textbox
+        /// </summary>
+        private async void GetUser()
         {
             string username = editUsername.Text;
 
-            return await DatabaseManager
-                .GetUser(username)
-                .ConfigureAwait(false);
+            var task = DatabaseManager.GetUser(username);
+            Plugin.CloudFirestore.IQuerySnapshot snapshot = await task.ConfigureAwait(false);
+
+            Instance.User = snapshot.ToObjects<UserProfile>().FirstOrDefault();
         }
 
         private bool ValidateUsernameUnique()
         {
-
-            var userTask = GetUser();
-            Instance.User = userTask.Result.ToObjects<UserProfile>().FirstOrDefault();
+            GetUser();
 
             if (Instance.User == null)
                 return true;

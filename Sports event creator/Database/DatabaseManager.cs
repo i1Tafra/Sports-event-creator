@@ -29,8 +29,8 @@ namespace SportsEventCreator.Database
         {
             return CrossCloudFirestore.Current
                           .Instance
-                          .GetCollection(COLLECTION_USER)
-                          .AddDocumentAsync(user);
+                          .Collection(COLLECTION_USER)
+                          .AddAsync(user);
         }
 
         /// <summary>
@@ -40,11 +40,12 @@ namespace SportsEventCreator.Database
         /// <returns></returns>
         internal static Task UpdateUser( UserProfile user)
         {
+
             return CrossCloudFirestore.Current
                          .Instance
-                         .GetCollection(COLLECTION_USER)
-                         .GetDocument(user.DocumentId)
-                         .UpdateDataAsync(user);
+                         .Collection(COLLECTION_USER)
+                         .Document(user.DocumentId)
+                         .UpdateAsync(user);
         }
 
         /// <summary>
@@ -54,19 +55,20 @@ namespace SportsEventCreator.Database
         /// <returns></returns>
         internal static Task<IQuerySnapshot> GetUser(string userID)
         {
+
             IQuery query = CrossCloudFirestore.Current
                             .Instance
-                            .GetCollection(COLLECTION_USER)
+                            .Collection(COLLECTION_USER)
                             .LimitTo(1);
 
             if (userID.Contains("@", StringComparison.Ordinal))
             {
                 return query.WhereEqualsTo(ATTRIBUTE_USER_EMAIL_, userID)
-                    .GetDocumentsAsync();
+                    .GetAsync();
             }
 
             return query.WhereEqualsTo(ATTRIBUTE_USER_USERNAME, userID)
-            .GetDocumentsAsync();
+            .GetAsync();
         }
         #endregion
 
@@ -80,8 +82,8 @@ namespace SportsEventCreator.Database
         {
             return CrossCloudFirestore.Current
                           .Instance
-                          .GetCollection(COLLECTION_USER_GROUPS)
-                          .AddDocumentAsync(userGroups);
+                          .Collection(COLLECTION_USER_GROUPS)
+                          .AddAsync(userGroups);
         }
 
         /// <summary>
@@ -93,9 +95,9 @@ namespace SportsEventCreator.Database
         {
             return CrossCloudFirestore.Current
                          .Instance
-                         .GetCollection(COLLECTION_USER_GROUPS)
-                         .GetDocument(groups.DocumentId)
-                         .UpdateDataAsync(groups);
+                         .Collection(COLLECTION_USER_GROUPS)
+                         .Document(groups.DocumentId)
+                         .UpdateAsync(groups);
         }
 
 
@@ -109,10 +111,10 @@ namespace SportsEventCreator.Database
             User only_user = new User(user);
             return CrossCloudFirestore.Current
                                      .Instance
-                                     .GetCollection(COLLECTION_USER_GROUPS)
+                                     .Collection(COLLECTION_USER_GROUPS)
                                      .WhereEqualsTo(ATTRIBUTE_USER_GROUPS_CREATOR, only_user)
                                      .LimitTo(1)
-                                     .GetDocumentsAsync();
+                                     .GetAsync();
         }
         #endregion
 
@@ -127,8 +129,8 @@ namespace SportsEventCreator.Database
             return CrossCloudFirestore
                .Current
                .Instance
-               .GetCollection(COLLETCTION_EVENT)
-               .AddDocumentAsync(sportEvent);
+               .Collection(COLLETCTION_EVENT)
+               .AddAsync(sportEvent);
 
         }
 
@@ -141,9 +143,9 @@ namespace SportsEventCreator.Database
         {
             return CrossCloudFirestore.Current
                          .Instance
-                         .GetCollection(COLLETCTION_EVENT)
-                         .GetDocument(sportEvent.DocumentId)
-                         .UpdateDataAsync(sportEvent);
+                         .Collection(COLLETCTION_EVENT)
+                         .Document(sportEvent.DocumentId)
+                         .UpdateAsync(sportEvent);
         }
 
         /// <summary>
@@ -153,29 +155,31 @@ namespace SportsEventCreator.Database
         /// <returns></returns>
         internal static Task<IQuerySnapshot> GetSportEvents(User user, bool is_attending = false)
         {
-            EventUser only_user = new EventUser(user);
-            only_user.IsAttending = is_attending;
+            EventUser only_user = new EventUser(user)
+            {
+                IsAttending = is_attending
+            };
 
             return CrossCloudFirestore.Current
                                      .Instance
-                                     .GetCollection(COLLETCTION_EVENT)
+                                     .Collection(COLLETCTION_EVENT)
                                      .WhereGreaterThan(ATTRIBUTE_DATE, DateTime.Now)
                                      .WhereArrayContains(ATTRIBUTE_USERS, only_user)
                                      .LimitTo(5)
                                      .OrderBy(ATTRIBUTE_DATE)
-                                     .GetDocumentsAsync();
+                                     .GetAsync();
         }
 
         internal static Task<IQuerySnapshot> GetSportEvents(SportEvent sportEvent)
         {
             return CrossCloudFirestore.Current
                                      .Instance
-                                     .GetCollection(COLLETCTION_EVENT)
+                                     .Collection(COLLETCTION_EVENT)
                                      .WhereEqualsTo(ATTRIBUTE_USER_GROUPS_CREATOR, sportEvent.Creator)
                                      .WhereEqualsTo(ATTRIBUTE_DATE, sportEvent.Date)
                                      .WhereEqualsTo(ATTRIBUTE_LOCATION, sportEvent.Location)
                                      .LimitTo(1)
-                                     .GetDocumentsAsync();
+                                     .GetAsync();
         }
         #endregion
     }

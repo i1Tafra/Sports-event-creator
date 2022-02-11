@@ -12,7 +12,7 @@
         /// <summary>
         /// Gets or sets a value indicating whether IsAttending
         /// </summary>
-        public bool IsAttending { get; set; } = false;
+        public bool IsAttending { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EventUser"/> class.

@@ -42,8 +42,8 @@ namespace SportsEventCreator.Resources
 
         private void SetFirestoreListner()
         {
-            CrossCloudFirestore.Current.Instance.GetCollection("UserGroups")
-                           .GetDocument(Instance.UserGroups.DocumentId)
+            CrossCloudFirestore.Current.Instance.Collection("UserGroups")
+                           .Document(Instance.UserGroups.DocumentId)
 
                            .AddSnapshotListener((snapshot, error) =>
                            {
